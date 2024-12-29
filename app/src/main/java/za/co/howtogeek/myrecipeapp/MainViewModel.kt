@@ -9,7 +9,11 @@ import kotlinx.coroutines.launch
 class MainViewModel: ViewModel() {
 
     private val _categoryState = mutableStateOf(RecipeState())
-    val categoryState: State<RecipeState> = _categoryState
+    val categoriesState: State<RecipeState> = _categoryState
+
+    init{
+        fetchCategories()
+    }
 
     private fun fetchCategories(){
         // run on a different thread to the main thread with coroutines:
