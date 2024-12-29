@@ -1,5 +1,6 @@
 package za.co.howtogeek.myrecipeapp
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,11 +26,12 @@ import coil.compose.rememberAsyncImagePainter
 /*
 Set up what we want ti display on the main screen
  */
+val TAG: String = "RecipeScreen -> "
 
 @Composable
 fun RecipeScreen(modifier: Modifier = Modifier){
     val recipeViewModel: MainViewModel = viewModel()
-    val viewState by recipeViewModel.categoriesState
+    val viewState by recipeViewModel.categoryState
 
     Box(modifier = Modifier.fillMaxSize()){
         when{
@@ -43,6 +45,7 @@ fun RecipeScreen(modifier: Modifier = Modifier){
             else -> {
                 //Display categories
                 CategoryScreen(categories = viewState.list)
+                Log.i(TAG, "RecipeScreen: viewState.list: ${viewState.list}")
             }
         }
     }
@@ -61,12 +64,16 @@ fun CategoryScreen(categories: List<Category>){
 // Format how each item diplays
 @Composable
 fun CategoryItem(category: Category){
-    Column(modifier = Modifier.padding(8.dp).fillMaxSize(),
+    Column(modifier = Modifier
+        .padding(8.dp)
+        .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally) {
         Image(
             painter = rememberAsyncImagePainter(category.strCategoryThumb),
             contentDescription = null,
-            modifier = Modifier.fillMaxSize().aspectRatio(1f)
+            modifier = Modifier
+                .fillMaxSize()
+                .aspectRatio(1f)
         )
 
         Text(

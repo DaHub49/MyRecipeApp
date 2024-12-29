@@ -8,9 +8,10 @@ import retrofit2.http.GET
  * Base URL: www.themealdb.com/api/json/v1/1/
  */
 
-private val baseUrl = "www.themealdb.com/api/json/v1/1/"
+//private val baseUrl = "www.themealdb.com/api/json/v1/1/"
 
-private val retrofit = Retrofit.Builder().baseUrl(baseUrl)
+// https://www.themealdb.com/api/json/v1/1/categories.php
+private val retrofit = Retrofit.Builder().baseUrl("https://www.themealdb.com/api/json/v1/1/") //(baseUrl)
     .addConverterFactory(GsonConverterFactory.create())
     .build()
 

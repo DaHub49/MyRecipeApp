@@ -1,5 +1,6 @@
 package za.co.howtogeek.myrecipeapp
 
+//import androidx.compose.runtime.State
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -9,7 +10,7 @@ import kotlinx.coroutines.launch
 class MainViewModel: ViewModel() {
 
     private val _categoryState = mutableStateOf(RecipeState())
-    val categoriesState: State<RecipeState> = _categoryState
+    val categoryState: State<RecipeState> = _categoryState
 
     init{
         fetchCategories()
@@ -25,7 +26,6 @@ class MainViewModel: ViewModel() {
                     loading = false,
                     error = null
                 )
-
             } catch (e: Exception){
                 _categoryState.value = _categoryState.value.copy(
                     loading = false,
