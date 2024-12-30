@@ -55,7 +55,7 @@ fun RecipeScreen(modifier: Modifier = Modifier){
 fun CategoryScreen(categories: List<Category>){
     LazyVerticalGrid(GridCells.Fixed(2), modifier = Modifier.fillMaxSize()) {
         items(categories){
-            category ->
+            category -> // or "item" ->
             CategoryItem(category = category)
         }
     }

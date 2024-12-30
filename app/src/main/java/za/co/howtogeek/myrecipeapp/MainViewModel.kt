@@ -1,6 +1,5 @@
 package za.co.howtogeek.myrecipeapp
 
-//import androidx.compose.runtime.State
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -19,6 +18,7 @@ class MainViewModel: ViewModel() {
     private fun fetchCategories(){
         // run on a different thread to the main thread with coroutines:
         viewModelScope.launch {
+            // Use try / catch when fetching from the internet:
             try {
                 val response = recipeService.getCategories()
                 _categoryState.value = _categoryState.value.copy(
