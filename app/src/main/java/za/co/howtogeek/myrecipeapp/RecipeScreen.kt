@@ -2,6 +2,7 @@ package za.co.howtogeek.myrecipeapp
 
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -29,7 +30,9 @@ Set up what we want ti display on the main screen
 val TAG: String = "RecipeScreen -> "
 
 @Composable
-fun RecipeScreen(modifier: Modifier = Modifier){
+fun RecipeScreen(modifier: Modifier = Modifier,
+                 navigateToDetail: (Category) -> Unit
+){
     val recipeViewModel: MainViewModel = viewModel()
     val viewState by recipeViewModel.categoryState
 
@@ -44,7 +47,8 @@ fun RecipeScreen(modifier: Modifier = Modifier){
             }
             else -> {
                 //Display categories
-                CategoryScreen(categories = viewState.list)
+                CategoryScreen(categories = viewState.list,
+                    navigateToDetail)
                 Log.i(TAG, "RecipeScreen: viewState.list: ${viewState.list}")
             }
         }
@@ -52,21 +56,26 @@ fun RecipeScreen(modifier: Modifier = Modifier){
 }
 
 @Composable
-fun CategoryScreen(categories: List<Category>){
+fun CategoryScreen(categories: List<Category>,
+                   navigateToDetail: (Category) -> Unit
+){
     LazyVerticalGrid(GridCells.Fixed(2), modifier = Modifier.fillMaxSize()) {
         items(categories){
-            category -> // or "item" ->
-            CategoryItem(category = category)
+                category -> // or "item" ->
+            CategoryItem(category = category, navigateToDetail)
         }
     }
 }
 
 // Format how each item diplays
 @Composable
-fun CategoryItem(category: Category){
+fun CategoryItem(category: Category,
+                 navigateToDetail: (Category) -> Unit
+){
     Column(modifier = Modifier
         .padding(8.dp)
-        .fillMaxSize(),
+        .fillMaxSize()
+        .clickable { navigateToDetail(category) },
         horizontalAlignment = Alignment.CenterHorizontally) {
         Image(
             painter = rememberAsyncImagePainter(category.strCategoryThumb),
