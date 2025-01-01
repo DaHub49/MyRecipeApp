@@ -40,15 +40,14 @@ android {
 }
 
 dependencies {
+    // Navigation:
+    implementation(libs.androidx.navigation.compose)
     // Compose ViewModel:
     implementation(libs.androidx.lifecycle.viewmodel.compose)
-
     // Network calls:
     implementation(libs.retrofit)
-
     // Json to Kotlin object mapping:
     implementation(libs.converter.gson)
-
     // Image loading:
     implementation(libs.coil.compose)
 
